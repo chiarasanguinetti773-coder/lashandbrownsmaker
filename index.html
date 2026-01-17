@@ -18,51 +18,45 @@
       text-align: center;
     }
     header img {
-      max-width: 200px;
+      max-width: 150px;
     }
     h1 {
       color: #d86c6c;
-      font-size: 28px;
-      margin-bottom: 20px;
+      font-size: 24px;
+      margin: 20px 0;
     }
     .intro {
-      max-width: 600px;
-      margin: 0 auto;
       text-align: center;
-      padding: 20px;
+      padding: 0 20px;
     }
     .services {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 40px;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
     }
-    .service-card {
-      width: 300px;
+    .service-button {
+      display: block;
+      width: 80%;
+      max-width: 400px;
       background-color: white;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      margin: 20px;
+      margin-bottom: 20px;
       text-align: center;
+      text-decoration: none;
+      color: #333;
     }
-    .service-card img {
+    .service-button img {
       max-width: 100%;
       border-radius: 5px;
       margin-bottom: 10px;
     }
-    .service-card h3 {
+    .service-button h3 {
       color: #d86c6c;
       font-size: 20px;
-    }
-    .cta-button {
-      display: inline-block;
-      background-color: #d86c6c;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -73,37 +67,45 @@
   
   <section class="intro">
     <h1>Lash&browns by Martina</h1>
-    <p>Valorizza il tuo sguardo con i trattamenti professionali di Martina, la specialista in extension ciglia, laminazione e microblading. Risultati strabilianti e lunga durata per uno sguardo magnetico!</p>
+    <p>Valorizza il tuo sguardo con i trattamenti professionali di Martina, la specialista in extension ciglia, laminazione e microblading.</p>
   </section>
 
   <section class="services">
-    <div class="service-card">
+    <a href="#effetto-russo" class="service-button">
       <img src="effetto-russo.jpg" alt="Effetto russo ciglia">
       <h3>Effetto Russo Ciglia</h3>
-      <p>Ciglia folte, lunghe e incurvate per uno sguardo irresistibile.</p>
-      <a href="https://wa.me/393487647581" class="cta-button">Prenota ora</a>
-    </div>
+    </a>
 
-    <div class="service-card">
+    <a href="#laminazione-ciglia" class="service-button">
       <img src="laminazione-ciglia.jpg" alt="Laminazione ciglia">
       <h3>Laminazione Ciglia</h3>
-      <p>Ciglia perfette e definite senza extension, per settimane.</p>
-      <a href="https://wa.me/393487647581" class="cta-button">Prenota ora</a>
-    </div>
+    </a>
 
-    <div class="service-card">
+    <a href="#powder-brows" class="service-button">
       <img src="powder-brows.jpg" alt="Powder brows">
       <h3>Powder Brows</h3>
-      <p>Sopracciglia piene e definite con un effetto naturale che dura.</p>
-      <a href="https://wa.me/393487647581" class="cta-button">Prenota ora</a>
-    </div>
+    </a>
 
-    <div class="service-card">
+    <a href="#microblading" class="service-button">
       <img src="microblading.jpg" alt="Microblading">
       <h3>Microblading</h3>
-      <p>Sopracciglia folte e precise, ridisegnate pelo per pelo.</p>
-      <a href="https://wa.me/393487647581" class="cta-button">Prenota ora</a>
-    </div>
+    </a>
+  </section>
+
+  <section id="effetto-russo">
+    <!-- Contenuto della sezione Effetto Russo Ciglia -->
+  </section>
+
+  <section id="laminazione-ciglia">
+    <!-- Contenuto della sezione Laminazione Ciglia -->
+  </section>
+
+  <section id="powder-brows">
+    <!-- Contenuto della sezione Powder Brows -->
+  </section>
+
+  <section id="microblading">
+    <!-- Contenuto della sezione Microblading -->
   </section>
   
 </body>

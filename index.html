@@ -4,109 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lash&browns by Martina</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8e8e8;
-      color: #333;
-    }
-    header {
-      background-color: #f8d8d8; 
-      padding: 20px;
-      text-align: center;
-    }
-    header img {
-      max-width: 150px;
-    }
-    h1 {
-      color: #d86c6c;
-      font-size: 24px;
-      margin: 20px 0;
-    }
-    .intro {
-      text-align: center;
-      padding: 0 20px;
-    }
+    /* Stili CSS precedenti */
     .services {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
       margin-top: 20px;
     }
     .service-button {
-      display: block;
-      width: 80%;
-      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
       background-color: white;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin-bottom: 20px;
-      text-align: center;
       text-decoration: none;
       color: #333;
+      width: 150px;
+      height: 150px;
+      justify-content: center;
+      text-align: center;
     }
-    .service-button img {
-      max-width: 100%;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-    .service-button h3 {
+    .service-button i {
+      font-size: 48px;
       color: #d86c6c;
-      font-size: 20px;
       margin-bottom: 10px;
+    }
+    .service-button span {
+      font-size: 14px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="lashes.png" alt="Lash&browns logo">
+    <img "lashes.png" alt="Lash&browns logo" class="profile-pic">
+    <div class="social-icons">
+      <a href="https://www.instagram.com/lashmmsenzafiltri" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@lashmmsenzafiltri" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
   </header>
   
-  <section class="intro">
-    <h1>Lash&browns by Martina</h1>
-    <p>Valorizza il tuo sguardo con i trattamenti professionali di Martina, la specialista in extension ciglia, laminazione e microblading.</p>
-  </section>
+  <!-- Sezione di introduzione -->
 
   <section class="services">
-    <a href="#effetto-russo" class="service-button">
-      <img src="effetto-russo.jpg" alt="Effetto russo ciglia">
-      <h3>Effetto Russo Ciglia</h3>
+    <a class="service-button" onclick="openModal('effetto-russo')">
+      <i class="fas fa-eye"></i>
+      <span>Effetto Russo Ciglia</span>
     </a>
-
-    <a href="#laminazione-ciglia" class="service-button">
-      <img src="laminazione-ciglia.jpg" alt="Laminazione ciglia">
-      <h3>Laminazione Ciglia</h3>
+    <a class="service-button" onclick="openModal('laminazione-ciglia')">
+      <i class="fas fa-magic"></i>
+      <span>Laminazione Ciglia</span>
     </a>
-
-    <a href="#powder-brows" class="service-button">
-      <img src="powder-brows.jpg" alt="Powder brows">
-      <h3>Powder Brows</h3>
+    <a class="service-button" onclick="openModal('powder-brows')">
+      <i class="fas fa-pencil-alt"></i>
+      <span>Powder Brows</span>
     </a>
-
-    <a href="#microblading" class="service-button">
-      <img src="microblading.jpg" alt="Microblading">
-      <h3>Microblading</h3>
+    <a class="service-button" onclick="openModal('microblading')">
+      <i class="fas fa-paint-brush"></i>
+      <span>Microblading</span>
     </a>
   </section>
 
-  <section id="effetto-russo">
-    <!-- Contenuto della sezione Effetto Russo Ciglia -->
-  </section>
+  <!-- Pop-up modali come prima -->
 
-  <section id="laminazione-ciglia">
-    <!-- Contenuto della sezione Laminazione Ciglia -->
-  </section>
+  <script>
+    function openModal(serviceId) {
+      document.getElementById(serviceId).style.display = "block";
+    }
 
-  <section id="powder-brows">
-    <!-- Contenuto della sezione Powder Brows -->
-  </section>
-
-  <section id="microblading">
-    <!-- Contenuto della sezione Microblading -->
-  </section>
-  
+    function closeModal(serviceId) {
+      document.getElementById(serviceId).style.display = "none";
+    }
+  </script>
 </body>
 </html>

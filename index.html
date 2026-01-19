@@ -4,9 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lash&browns by Martina</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
-    /* Stili CSS precedenti */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8e8e8;
+      color: #333;
+    }
+    header {
+      background-color: #f8d8d8; 
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #d86c6c;
+      font-size: 24px;
+      margin: 20px 0;
+    }
+    .slogan {
+      font-size: 18px;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px auto;
+      display: block;
+    }
     .services {
       display: flex;
       flex-wrap: wrap;
@@ -29,57 +57,90 @@
       justify-content: center;
       text-align: center;
     }
-    .service-button i {
-      font-size: 48px;
-      color: #d86c6c;
+    .service-button img {
+      width: 48px;
+      height: 48px;
       margin-bottom: 10px;
     }
     .service-button span {
       font-size: 14px;
       text-align: center;
     }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      background-color: #f8e8e8;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 80%;
+    }
+    .close {
+      color: #d86c6c;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #d86c6c;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img "lashes.png" alt="Lash&browns logo" class="profile-pic">
-    <div class="social-icons">
-      <a href="https://www.instagram.com/lashmmsenzafiltri" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@lashmmsenzafiltri" target="_blank"><i class="fab fa-tiktok"></i></a>
-    </div>
+    <img src="/mnt/user-data/uploads/lashes.png" alt="Lash&browns logo" class="profile-pic">
+    <h1>Lash&browns by Martina</h1>
+    <p class="slogan">Ciglia perfette in un'ora, per uno sguardo che incanta!</p>
   </header>
   
-  <!-- Sezione di introduzione -->
-
   <section class="services">
-    <a class="service-button" onclick="openModal('effetto-russo')">
-      <i class="fas fa-eye"></i>
+    <div class="service-button" onclick="openModal('effetto-russo')">
+      <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Effetto Russo Ciglia">
       <span>Effetto Russo Ciglia</span>
-    </a>
-    <a class="service-button" onclick="openModal('laminazione-ciglia')">
-      <i class="fas fa-magic"></i>
+    </div>
+    <div class="service-button" onclick="openModal('laminazione-ciglia')">
+      <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Laminazione Ciglia">
       <span>Laminazione Ciglia</span>
-    </a>
-    <a class="service-button" onclick="openModal('powder-brows')">
-      <i class="fas fa-pencil-alt"></i>
+    </div>
+    <div class="service-button" onclick="openModal('powder-brows')">
+      <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Powder Brows">
       <span>Powder Brows</span>
-    </a>
-    <a class="service-button" onclick="openModal('microblading')">
-      <i class="fas fa-paint-brush"></i>
+    </div>
+    <div class="service-button" onclick="openModal('microblading')">
+      <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Microblading">
       <span>Microblading</span>
-    </a>
+    </div>
   </section>
 
-  <!-- Pop-up modali come prima -->
+  <div id="effetto-russo" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('effetto-russo')">&times;</span>
+      <h2>Effetto Russo Ciglia</h2>
+      <p>L'Effetto Russo dona alle tue ciglia un look extra-voluminoso e seducente. Questa tecnica è perfetta per valorizzare gli occhi grandi e le ciglia naturalmente folte.</p>
+      <p>Durata del trattamento: circa 1 ora</p>
+      <p>Ritocco consigliato: ogni 3-4 settimane</p>
+      <a href="https://wa.me/393487647581" class="cta-button">Prenota su WhatsApp</a>
+    </div>
+  </div>
 
-  <script>
-    function openModal(serviceId) {
-      document.getElementById(serviceId).style.display = "block";
-    }
-
-    function closeModal(serviceId) {
-      document.getElementById(serviceId).style.display = "none";
-    }
-  </script>
-</body>
-</html>
+  <div id="laminazione-ciglia" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('laminazione-ciglia')">&times;</span>
+      <h2>Laminazione Ciglia</h2>
+      <p>La laminazione ciglia

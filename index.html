@@ -9,23 +9,26 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f8e8e8;
+      background-color: #f0d8d8;
       color: #333;
     }
     header {
-      background-color: #f8d8d8; 
+      background-color: #f0d8d8;
       padding: 20px;
       text-align: center;
     }
     h1 {
-      color: #d86c6c;
-      font-size: 24px;
-      margin: 20px 0;
+      color: #8b4513;
+      font-size: 28px;
+      margin: 10px 0;
     }
-    .slogan {
-      font-size: 18px;
-      font-style: italic;
-      margin-bottom: 20px;
+    .intro {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .profile-pic {
       width: 150px;
@@ -47,7 +50,7 @@
       align-items: center;
       margin: 10px;
       padding: 10px;
-      background-color: white;
+      background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-decoration: none;
@@ -58,12 +61,12 @@
       text-align: center;
     }
     .service-button img {
-      width: 48px;
-      height: 48px;
+      width: 64px;
+      height: 64px;
       margin-bottom: 10px;
     }
     .service-button span {
-      font-size: 14px;
+      font-size: 16px;
       text-align: center;
     }
     .modal {
@@ -78,14 +81,15 @@
       background-color: rgba(0, 0, 0, 0.4);
     }
     .modal-content {
-      background-color: #f8e8e8;
+      background-color: #fff;
       margin: 15% auto;
       padding: 20px;
       border-radius: 10px;
       max-width: 80%;
+      text-align: center;
     }
     .close {
-      color: #d86c6c;
+      color: #8b4513;
       float: right;
       font-size: 28px;
       font-weight: bold;
@@ -93,22 +97,26 @@
     }
     .cta-button {
       display: inline-block;
-      background-color: #d86c6c;
+      background-color: #4caf50;
       color: white;
       padding: 10px 20px;
       text-decoration: none;
       border-radius: 5px;
       margin-top: 20px;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="/mnt/user-data/uploads/lashes.png" alt="Lash&browns logo" class="profile-pic">
     <h1>Lash&browns by Martina</h1>
-    <p class="slogan">Ciglia perfette in un'ora, per uno sguardo che incanta!</p>
   </header>
   
+  <section class="intro">
+    <img src="/mnt/user-data/uploads/lashes.png" alt="Lash&browns logo" class="profile-pic">
+    <p>Benvenuti nel mio spazio! Sono Martina, una Lash & Brow Artist con oltre 10 anni di esperienza. Specializzata in extension ciglia, laminazione e microblading, creo look su misura per valorizzare al meglio la bellezza naturale di ogni cliente. Con la mia abilità e velocità, realizzo ciglia perfette in meno di un'ora, regalando uno sguardo magnetico e duraturo. Scegli tra i miei servizi e prenota subito il tuo appuntamento!</p>
+  </section>
+
   <section class="services">
     <div class="service-button" onclick="openModal('effetto-russo')">
       <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Effetto Russo Ciglia">
@@ -133,9 +141,7 @@
       <span class="close" onclick="closeModal('effetto-russo')">&times;</span>
       <h2>Effetto Russo Ciglia</h2>
       <p>L'Effetto Russo dona alle tue ciglia un look extra-voluminoso e seducente. Questa tecnica è perfetta per valorizzare gli occhi grandi e le ciglia naturalmente folte.</p>
-      <p>Durata del trattamento: circa 1 ora</p>
-      <p>Ritocco consigliato: ogni 3-4 settimane</p>
-      <a href="https://wa.me/393487647581" class="cta-button">Prenota su WhatsApp</a>
+      <a href="tel:+393487647581" class="cta-button">Chiama ora</a>
     </div>
   </div>
 
@@ -143,4 +149,37 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('laminazione-ciglia')">&times;</span>
       <h2>Laminazione Ciglia</h2>
-      <p>La laminazione ciglia
+      <p>La laminazione ciglia incurva e solleva le tue ciglia naturali per uno sguardo aperto e luminoso. Ideale per ciglia dritte o che tendono a piegarsi verso il basso.</p>
+      <a href="tel:+393487647581" class="cta-button">Chiama ora</a>
+    </div>
+  </div>
+
+  <div id="powder-brows" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('powder-brows')">&times;</span>
+      <h2>Powder Brows</h2>
+      <p>Il powder brows è una tecnica di trucco semipermanente che dona alle sopracciglia un aspetto pieno e definito. Adatto a tutti i tipi di sopracciglia, corregge asimmetrie e valorizza lo sguardo.</p>
+      <a href="tel:+393487647581" class="cta-button">Chiama ora</a>
+    </div>
+  </div>
+
+  <div id="microblading" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('microblading')">&times;</span>
+      <h2>Microblading</h2>
+      <p>Il microblading è una tecnica di trucco semipermanente che ricrea i peli delle sopracciglia con tratti sottili e precisi. Ideale per sopracciglia rade o poco definite, regala un effetto naturale e duraturo.</p>
+      <a href="tel:+393487647581" class="cta-button">Chiama ora</a>
+    </div>
+  </div>
+
+  <script>
+    function openModal(serviceId) {
+      document.getElementById(serviceId).style.display = "block";
+    }
+
+    function closeModal(serviceId) {
+      document.getElementById(serviceId).style.display = "none";
+    }
+  </script>
+</body>
+</html>

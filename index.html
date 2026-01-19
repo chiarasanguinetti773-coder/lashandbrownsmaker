@@ -1,185 +1,377 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lash&browns by Martina</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lash&Browns by Martina</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0d8d8;
-      color: #333;
-    }
-    header {
-      background-color: #f0d8d8;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      color: #8b4513;
-      font-size: 28px;
-      margin: 10px 0;
-    }
-    .intro {
-      text-align: center;
-      padding: 20px;
-      background-color: #fff;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 20px auto;
-      display: block;
-    }
-    .services {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    .service-button {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 10px;
-      padding: 10px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-decoration: none;
-      color: #333;
-      width: 150px;
-      height: 150px;
-      justify-content: center;
-      text-align: center;
-    }
-    .service-button img {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 10px;
-    }
-    .service-button span {
-      font-size: 16px;
-      text-align: center;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-    .modal-content {
-      background-color: #fff;
-      margin: 15% auto;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 80%;
-      text-align: center;
-    }
-    .close {
-      color: #8b4513;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .cta-button {
-      display: inline-block;
-      background-color: #4caf50;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      font-size: 18px;
-    }
+    body { font-family: system-ui, -apple-system, sans-serif; }
+    .modal { display:none; }
+    .modal.active { display:flex; }
   </style>
 </head>
-<body>
-  <header>
-    <h1>Lash&browns by Martina</h1>
+
+<body class="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50 text-gray-800">
+
+  <!-- HEADER / HERO -->
+  <header class="max-w-3xl mx-auto px-4 pt-8 pb-6">
+    <div class="bg-white/80 backdrop-blur rounded-3xl shadow-xl overflow-hidden border border-rose-100">
+      <!-- Hero image -->
+      <div class="relative h-52 sm:h-64">
+        <img
+          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1400&q=80"
+          alt="Lash & Brows"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+
+        <div class="absolute bottom-0 left-0 right-0 p-5 sm:p-7 text-white">
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+            Lash&amp;browns <span class="font-semibold opacity-95">by Martina</span>
+          </h1>
+          <p class="mt-1 text-sm sm:text-base opacity-90">
+            Sguardo curato, naturale o wow: scegli il tuo stile ✨
+          </p>
+
+          <!-- Social icons row -->
+          <div class="mt-4 flex items-center gap-3">
+            <!-- Cambia qui gli href quando mi dai i link -->
+            <a id="igLink" href="https://instagram.com/" target="_blank" rel="noopener"
+               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow">
+              <!-- Instagram icon -->
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <path d="M17.5 6.5h.01"/>
+              </svg>
+            </a>
+
+            <a id="ttLink" href="https://tiktok.com/" target="_blank" rel="noopener"
+               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow">
+              <!-- TikTok-like icon -->
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-900" fill="currentColor">
+                <path d="M16.5 2c.3 2.1 1.6 3.9 3.5 4.8V10c-1.5 0-2.9-.5-4-1.3V16c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.3 0 .7 0 1 .1V13c-.3-.1-.6-.2-1-.2-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3V2h3.5z"/>
+              </svg>
+            </a>
+
+            <a id="waLink" href="https://wa.me/" target="_blank" rel="noopener"
+               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow">
+              <!-- WhatsApp icon -->
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-green-600" fill="currentColor">
+                <path d="M20.52 3.48A11.94 11.94 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.97L0 24l6.34-1.68a11.9 11.9 0 0 0 5.72 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.4zM12.06 21.8h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.76 1 1-3.66-.24-.38a9.9 9.9 0 1 1 18.5-5.29c0 5.46-4.45 9.92-9.92 9.92zm5.76-7.42c-.31-.15-1.83-.9-2.11-1-.28-.1-.48-.15-.68.15-.2.31-.78 1-.95 1.2-.18.2-.36.23-.67.08-.31-.15-1.31-.48-2.49-1.54-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.13-.63.14-.14.31-.36.46-.54.15-.18.2-.31.31-.52.1-.2.05-.38-.03-.54-.08-.15-.68-1.64-.93-2.25-.24-.58-.48-.5-.68-.5h-.58c-.2 0-.54.08-.82.38-.28.31-1.08 1.06-1.08 2.58 0 1.52 1.1 2.99 1.25 3.2.15.2 2.17 3.31 5.26 4.64.74.32 1.32.51 1.77.65.75.24 1.44.2 1.98.12.6-.09 1.83-.75 2.09-1.48.26-.73.26-1.35.18-1.48-.08-.13-.28-.2-.6-.35z"/>
+              </svg>
+            </a>
+
+            <span class="text-xs sm:text-sm opacity-90 ml-1">Seguimi • Prenota • Scrivimi 💌</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intro copy + CTA -->
+      <div class="p-5 sm:p-8">
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-900">
+          Benvenuta nel mio spazio 💗
+        </h2>
+
+        <p class="mt-3 text-gray-600 leading-relaxed">
+          Sono <span class="font-semibold text-gray-900">Martina</span>, Lash &amp; Brow Artist con esperienza nel valorizzare lo sguardo
+          rispettando la tua unicità. Qui non troverai “un trattamento uguale per tutte”:
+          insieme scegliamo forma, intensità e finitura — dal super naturale al super definito —
+          per farti sentire <span class="font-semibold">ordinata, luminosa e sicura</span> anche senza trucco.
+        </p>
+
+        <p class="mt-3 text-gray-600 leading-relaxed">
+          Vuoi capire qual è il servizio perfetto per te? 👇
+          Clicca e scopri tutti i trattamenti con foto e descrizioni dettagliate.
+        </p>
+
+        <button id="discoverBtn"
+          class="mt-6 w-full rounded-2xl bg-gradient-to-r from-rose-500 to-fuchsia-600 hover:from-rose-600 hover:to-fuchsia-700 text-white font-semibold py-4 px-6 shadow-lg transition transform hover:scale-[1.01]">
+          Scopri di più ✨
+        </button>
+      </div>
+    </div>
   </header>
-  
-  <section class="intro">
-    <img src="/mnt/user-data/uploads/lashes.png" alt="Lash&browns logo" class="profile-pic">
-    <p>Benvenuti nel mio spazio! Sono Martina, una Lash & Brow Artist con oltre 10 anni di esperienza. Specializzata in extension ciglia, laminazione e microblading, creo look su misura per valorizzare al meglio la bellezza naturale di ogni cliente. Con la mia abilità e velocità, realizzo ciglia perfette in meno di un'ora, regalando uno sguardo magnetico e duraturo. Scegli tra i miei servizi e prenota subito il tuo appuntamento!</p>
-  </section>
 
-  <section class="services">
-    <div class="service-button" onclick="openModal('effetto-russo')">
-      <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Effetto Russo Ciglia">
-      <span>Effetto Russo Ciglia</span>
-    </div>
-    <div class="service-button" onclick="openModal('laminazione-ciglia')">
-      <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Laminazione Ciglia">
-      <span>Laminazione Ciglia</span>
-    </div>
-    <div class="service-button" onclick="openModal('powder-brows')">
-      <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Powder Brows">
-      <span>Powder Brows</span>
-    </div>
-    <div class="service-button" onclick="openModal('microblading')">
-      <img src="/mnt/user-data/uploads/IMG_3780.png" alt="Microblading">
-      <span>Microblading</span>
-    </div>
-  </section>
+  <!-- SERVICES (hidden until CTA) -->
+  <main id="servicesSection" class="max-w-3xl mx-auto px-4 pb-10 hidden">
+    <div class="bg-white/80 backdrop-blur rounded-3xl shadow-xl border border-rose-100 overflow-hidden">
+      <div class="p-5 sm:p-8 border-b border-rose-100">
+        <h3 class="text-xl sm:text-2xl font-bold">Trattamenti ✨</h3>
+        <p class="mt-2 text-gray-600">
+          Tocca un trattamento per leggere tutti i dettagli (durata, effetto, a chi è consigliato).
+        </p>
+      </div>
 
-  <div id="effetto-russo" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('effetto-russo')">&times;</span>
-      <h2>Effetto Russo Ciglia</h2>
-      <p>L'Effetto Russo dona alle tue ciglia un look extra-voluminoso e seducente. Questa tecnica è perfetta per valorizzare gli occhi grandi e le ciglia naturalmente folte.</p>
-      <a href="tel:+393487647581" class="cta-button">Chiama ora</a>
-    </div>
-  </div>
+      <!-- Cards container -->
+      <div id="cards" class="p-5 sm:p-8 space-y-4"></div>
 
-  <div id="laminazione-ciglia" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('laminazione-ciglia')">&times;</span>
-      <h2>Laminazione Ciglia</h2>
-      <p>La laminazione ciglia incurva e solleva le tue ciglia naturali per uno sguardo aperto e luminoso. Ideale per ciglia dritte o che tendono a piegarsi verso il basso.</p>
-      <a href="tel:+393487647581" class="cta-button">Chiama ora</a>
+      <div class="px-5 sm:px-8 pb-6 text-sm text-gray-500">
+        * Le descrizioni sono informative: la scelta finale la facciamo insieme in base al tuo occhio, sopracciglio e stile.
+      </div>
     </div>
-  </div>
+  </main>
 
-  <div id="powder-brows" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('powder-brows')">&times;</span>
-      <h2>Powder Brows</h2>
-      <p>Il powder brows è una tecnica di trucco semipermanente che dona alle sopracciglia un aspetto pieno e definito. Adatto a tutti i tipi di sopracciglia, corregge asimmetrie e valorizza lo sguardo.</p>
-      <a href="tel:+393487647581" class="cta-button">Chiama ora</a>
-    </div>
-  </div>
+  <!-- MODAL -->
+  <div id="modal" class="modal fixed inset-0 bg-black/60 items-start justify-center p-4 z-50 overflow-y-auto">
+    <div class="w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden mt-6">
+      <div class="p-4 sm:p-6 flex items-start justify-between border-b">
+        <div>
+          <h4 id="modalTitle" class="text-xl sm:text-2xl font-bold"></h4>
+          <p id="modalSubtitle" class="text-sm text-gray-500 mt-1"></p>
+        </div>
+        <button id="closeModal" class="p-2 rounded-xl hover:bg-gray-100 transition" aria-label="Chiudi">
+          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
-  <div id="microblading" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('microblading')">&times;</span>
-      <h2>Microblading</h2>
-      <p>Il microblading è una tecnica di trucco semipermanente che ricrea i peli delle sopracciglia con tratti sottili e precisi. Ideale per sopracciglia rade o poco definite, regala un effetto naturale e duraturo.</p>
-      <a href="tel:+393487647581" class="cta-button">Chiama ora</a>
+      <div class="p-4 sm:p-6">
+        <img id="modalImg" alt="" class="w-full h-48 sm:h-64 object-cover rounded-2xl" />
+        <div id="modalBody" class="mt-5 text-gray-700 leading-relaxed whitespace-pre-line"></div>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a id="bookBtn" href="https://wa.me/" target="_blank" rel="noopener"
+             class="inline-flex items-center justify-center gap-2 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-5 shadow transition">
+            Prenota su WhatsApp
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2H6m12 0h-2"/>
+            </svg>
+          </a>
+
+          <button id="shareBtn"
+            class="inline-flex items-center justify-center gap-2 rounded-2xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-semibold py-3 px-5 transition">
+            Copia testo da condividere
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16h8M8 12h8M8 8h8M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H8l-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </button>
+        </div>
+
+        <p id="copyHint" class="text-xs text-gray-500 mt-3 hidden">Copiato! ✅</p>
+      </div>
     </div>
   </div>
 
   <script>
-    function openModal(serviceId) {
-      document.getElementById(serviceId).style.display = "block";
+    // 👉 CAMBIA QUI i link social quando me li dai
+    const SOCIAL = {
+      instagram: "https://instagram.com/",
+      tiktok: "https://tiktok.com/",
+      whatsapp: "https://wa.me/" // esempio: "https://wa.me/393XXXXXXXXX"
+    };
+
+    document.getElementById("igLink").href = SOCIAL.instagram;
+    document.getElementById("ttLink").href = SOCIAL.tiktok;
+    document.getElementById("waLink").href = SOCIAL.whatsapp;
+    document.getElementById("bookBtn").href = SOCIAL.whatsapp;
+
+    const SERVICES = [
+      {
+        id: "russian",
+        title: "Effetto Russo Ciglia 💥",
+        subtitle: "Volume intenso e sguardo super definito",
+        img: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1400&q=80",
+        short: "Perfetto se vuoi un effetto pieno, scenografico e ordinato ogni giorno.",
+        body:
+`L’“Effetto Russo” è un trattamento di extension ciglia pensato per chi desidera uno sguardo più intenso e definito, con un risultato visibilmente pieno ma sempre armonioso.
+
+✅ Come funziona:
+Creo dei piccoli ventagli (fan) di più ciglia sottilissime e li applico su ogni ciglia naturale idonea. Questo permette di ottenere volume e profondità senza appesantire.
+
+✨ Risultato:
+• Effetto wow, pieno e “fluffy”
+• Sguardo più aperto e magnetico
+• Ideale anche se hai ciglia naturali poco folte
+
+⏱️ Durata e mantenimento:
+Il trattamento dura in media 3–4 settimane, ma per averle sempre perfette consiglio un refill ogni 2–3 settimane (dipende dal tuo ciclo di crescita e dalle abitudini).
+
+👀 A chi lo consiglio:
+• A chi ama un make-up look “pronto” anche senza trucco
+• A chi vuole definizione e volume
+• A chi desidera correggere visivamente forma/occhio (si sceglie mappatura personalizzata)
+
+📌 Nota importante:
+Prima di iniziare valutiamo insieme il tuo occhio, la tua ciglia naturale e lo stile che preferisci: l’obiettivo è un effetto bello, proporzionato e confortevole.`
+      },
+      {
+        id: "lamination",
+        title: "Laminazione Ciglia ✨",
+        subtitle: "Curvatura naturale + nutrimento",
+        img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1400&q=80",
+        short: "Se vuoi un look naturale, ciglia più “aperte” e ordinate.",
+        body:
+`La laminazione ciglia è il trattamento ideale se ami un risultato naturale ma visibile: le ciglia vengono sollevate, incurvate e nutrite, per uno sguardo più aperto e luminoso.
+
+✅ Cosa ottieni:
+• Curvatura naturale (effetto “lash lift”)
+• Ciglia più ordinate e più “lunghe” alla vista
+• Aspetto pulito anche senza mascara
+
+🧴 In più:
+Durante il trattamento si lavora anche sulla nutrizione: le ciglia risultano più morbide e curate.
+
+⏱️ Durata:
+In media 6–8 settimane (varia in base al ciclo naturale delle ciglia).
+
+👀 A chi lo consiglio:
+• A chi non vuole extension
+• A chi ha ciglia dritte o che “puntano in giù”
+• A chi vuole un effetto naturale ma evidente
+
+💡 Tip:
+Perfetta anche prima delle vacanze: zero sbatti, sguardo in ordine ogni giorno.`
+      },
+      {
+        id: "powder",
+        title: "Powder Brows ☁️",
+        subtitle: "Sopracciglia sfumate e definite",
+        img: "https://images.unsplash.com/photo-1526045478516-99145907023c?auto=format&fit=crop&w=1400&q=80",
+        short: "Effetto trucco soft: sopracciglia piene, ordinate e super eleganti.",
+        body:
+`Le Powder Brows (sopracciglia effetto polvere) sono una tecnica che crea una sfumatura delicata e uniforme, simile a un makeup leggero e naturale.
+
+✨ Risultato:
+• Sopracciglia più piene e ordinate
+• Effetto “ombrettato” (non a pelo)
+• Definizione elegante e modulabile (soft o più intensa)
+
+✅ Perché piace:
+Perché “sistema” la forma senza sembrare eccessiva: si lavora sulla struttura e sulla sfumatura per valorizzare il tuo viso.
+
+⏱️ Durata:
+Mediamente 12–24 mesi (dipende dalla pelle, stile di vita e cura). Sono consigliati ritocchi nel tempo.
+
+👀 A chi lo consiglio:
+• A chi si trucca le sopracciglia ogni giorno
+• A chi ha vuoti o asimmetrie da correggere
+• A chi vuole un effetto ordinato e naturale
+
+📌 Nota:
+Prima di procedere si fa sempre una consulenza (forma + colore) per un risultato armonico e realistico.`
+      },
+      {
+        id: "microblading",
+        title: "Microblading 🪶",
+        subtitle: "Effetto pelo realistico",
+        img: "https://images.unsplash.com/photo-1520975958225-1f94a98772c1?auto=format&fit=crop&w=1400&q=80",
+        short: "Per chi vuole riempire vuoti con un effetto pelo super naturale.",
+        body:
+`Il microblading è una tecnica manuale che ricrea l’effetto pelo, disegnando tratti sottili e realistici dove mancano.
+
+✨ Risultato:
+• Effetto pelo naturale
+• Riempimento di zone vuote
+• Forma più definita mantenendo un aspetto delicato
+
+✅ Come si lavora:
+Si studia la tua struttura e si crea un disegno su misura (shape). Poi si procede con tratti sottili che imitano i peli naturali.
+
+⏱️ Durata:
+In media 9–18 mesi (varia per tipo di pelle e cura). Nel tempo si può fare un ritocco di mantenimento.
+
+👀 A chi lo consiglio:
+• A chi ha sopracciglia rade o con buchi
+• A chi vuole un effetto naturale “pelo su pelo”
+• A chi desidera una forma più armonica senza look truccato
+
+📌 Nota:
+Su pelli molto grasse o molto sensibili può essere più indicata la tecnica Powder: te lo dico sempre con sincerità in consulenza.`
+      }
+    ];
+
+    const discoverBtn = document.getElementById("discoverBtn");
+    const servicesSection = document.getElementById("servicesSection");
+    const cardsWrap = document.getElementById("cards");
+
+    discoverBtn.addEventListener("click", () => {
+      servicesSection.classList.remove("hidden");
+      servicesSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    function createCard(service) {
+      const btn = document.createElement("button");
+      btn.className =
+        "w-full text-left group rounded-3xl bg-white border border-rose-100 shadow hover:shadow-xl transition overflow-hidden";
+      btn.setAttribute("data-id", service.id);
+
+      btn.innerHTML = `
+        <div class="flex flex-col sm:flex-row">
+          <div class="sm:w-44 w-full h-40 sm:h-auto">
+            <img src="${service.img}" alt="${service.title}"
+                 class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-300" />
+          </div>
+          <div class="p-4 sm:p-5 flex-1">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h4 class="text-lg sm:text-xl font-extrabold text-gray-900">${service.title}</h4>
+                <p class="text-sm text-gray-500 mt-1">${service.subtitle}</p>
+              </div>
+              <span class="mt-1 inline-flex items-center gap-1 text-rose-600 font-semibold text-sm">
+                Apri
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="mt-3 text-gray-700 leading-relaxed">${service.short}</p>
+          </div>
+        </div>
+      `;
+
+      btn.addEventListener("click", () => openModal(service.id));
+      return btn;
     }
 
-    function closeModal(serviceId) {
-      document.getElementById(serviceId).style.display = "none";
+    // render cards
+    SERVICES.forEach(s => cardsWrap.appendChild(createCard(s)));
+
+    // modal logic
+    const modal = document.getElementById("modal");
+    const closeModal = document.getElementById("closeModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const modalImg = document.getElementById("modalImg");
+    const modalBody = document.getElementById("modalBody");
+    const shareBtn = document.getElementById("shareBtn");
+    const copyHint = document.getElementById("copyHint");
+
+    function openModal(id) {
+      const s = SERVICES.find(x => x.id === id);
+      if (!s) return;
+
+      modalTitle.textContent = s.title;
+      modalSubtitle.textContent = s.subtitle;
+      modalImg.src = s.img;
+      modalImg.alt = s.title;
+      modalBody.textContent = s.body;
+
+      copyHint.classList.add("hidden");
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
     }
+
+    function closeModalFn() {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    closeModal.addEventListener("click", closeModalFn);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModalFn(); });
+
+    shareBtn.addEventListener("click", async () => {
+      const text = `${modalTitle.textContent}\n${modalSubtitle.textContent}\n\n${modalBody.textContent}\n\nPrenota: ${SOCIAL.whatsapp}`;
+      try {
+        await navigator.clipboard.writeText(text);
+        copyHint.classList.remove("hidden");
+        setTimeout(() => copyHint.classList.add("hidden"), 1500);
+      } catch (err) {
+        alert("Non riesco a copiare automaticamente. Se vuoi, seleziona il testo e copialo manualmente.");
+      }
+    });
   </script>
 </body>
 </html>

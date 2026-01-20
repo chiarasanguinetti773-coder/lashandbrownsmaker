@@ -20,7 +20,8 @@
       <!-- Hero image -->
       <div class="relative h-52 sm:h-64">
         <img
-          src="lashes.png"
+          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1400&q=80"
+          alt="Lash & Brows"
           class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
@@ -37,7 +38,7 @@
           <div class="mt-4 flex items-center gap-3">
             <!-- Cambia qui gli href quando mi dai i link -->
             <a id="igLink" href="https://instagram.com/" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow">
+               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
               <!-- Instagram icon -->
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/>
@@ -47,7 +48,7 @@
             </a>
 
             <a id="ttLink" href="https://tiktok.com/" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow">
+               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
               <!-- TikTok-like icon -->
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-900" fill="currentColor">
                 <path d="M16.5 2c.3 2.1 1.6 3.9 3.5 4.8V10c-1.5 0-2.9-.5-4-1.3V16c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.3 0 .7 0 1 .1V13c-.3-.1-.6-.2-1-.2-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3V2h3.5z"/>
@@ -55,7 +56,7 @@
             </a>
 
             <a id="waLink" href="https://wa.me/" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow">
+               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
               <!-- WhatsApp icon -->
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-green-600" fill="currentColor">
                 <path d="M20.52 3.48A11.94 11.94 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.97L0 24l6.34-1.68a11.9 11.9 0 0 0 5.72 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.4zM12.06 21.8h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.76 1 1-3.66-.24-.38a9.9 9.9 0 1 1 18.5-5.29c0 5.46-4.45 9.92-9.92 9.92zm5.76-7.42c-.31-.15-1.83-.9-2.11-1-.28-.1-.48-.15-.68.15-.2.31-.78 1-.95 1.2-.18.2-.36.23-.67.08-.31-.15-1.31-.48-2.49-1.54-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.13-.63.14-.14.31-.36.46-.54.15-.18.2-.31.31-.52.1-.2.05-.38-.03-.54-.08-.15-.68-1.64-.93-2.25-.24-.58-.48-.5-.68-.5h-.58c-.2 0-.54.08-.82.38-.28.31-1.08 1.06-1.08 2.58 0 1.52 1.1 2.99 1.25 3.2.15.2 2.17 3.31 5.26 4.64.74.32 1.32.51 1.77.65.75.24 1.44.2 1.98.12.6-.09 1.83-.75 2.09-1.48.26-.73.26-1.35.18-1.48-.08-.13-.28-.2-.6-.35z"/>
@@ -86,7 +87,7 @@
         </p>
 
         <button id="discoverBtn"
-          class="mt-6 w-full rounded-2xl bg-gradient-to-r from-rose-500 to-fuchsia-600 hover:from-rose-600 hover:to-fuchsia-700 text-white font-semibold py-4 px-6 shadow-lg transition transform hover:scale-[1.01]">
+          class="mt-6 w-full rounded-2xl bg-gradient-to-r from-rose-500 to-fuchsia-600 hover:from-rose-600 hover:to-fuchsia-700 text-white font-semibold py-4 px-6 shadow-lg transition transform hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200">
           Scopri di più ✨
         </button>
       </div>
@@ -106,8 +107,13 @@
       <!-- Cards container -->
       <div id="cards" class="p-5 sm:p-8 space-y-4"></div>
 
-      <div class="px-5 sm:px-8 pb-6 text-sm text-gray-500">
-        * Le descrizioni sono informative: la scelta finale la facciamo insieme in base al tuo occhio, sopracciglio e stile.
+      <!-- WARNING (richiesto) -->
+      <div class="px-5 sm:px-8 pb-6">
+        <div class="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+          <span class="font-semibold">⚠️ Nota importante:</span>
+          le informazioni qui sotto sono indicative. <span class="font-semibold">La scelta finale del trattamento verrà decisa in presenza, dopo una consulenza</span>,
+          valutando occhio, ciglia, sopracciglia e risultato desiderato.
+        </div>
       </div>
     </div>
   </main>
@@ -120,7 +126,7 @@
           <h4 id="modalTitle" class="text-xl sm:text-2xl font-bold"></h4>
           <p id="modalSubtitle" class="text-sm text-gray-500 mt-1"></p>
         </div>
-        <button id="closeModal" class="p-2 rounded-xl hover:bg-gray-100 transition" aria-label="Chiudi">
+        <button id="closeModal" class="p-2 rounded-xl hover:bg-gray-100 transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200" aria-label="Chiudi">
           <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -133,7 +139,7 @@
 
         <div class="mt-6 flex flex-col sm:flex-row gap-3">
           <a id="bookBtn" href="https://wa.me/" target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center gap-2 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-5 shadow transition">
+             class="inline-flex items-center justify-center gap-2 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-5 shadow transition active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-green-200">
             Prenota su WhatsApp
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2H6m12 0h-2"/>
@@ -141,7 +147,7 @@
           </a>
 
           <button id="shareBtn"
-            class="inline-flex items-center justify-center gap-2 rounded-2xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-semibold py-3 px-5 transition">
+            class="inline-flex items-center justify-center gap-2 rounded-2xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-semibold py-3 px-5 transition active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200">
             Copia testo da condividere
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 16h8M8 12h8M8 8h8M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H8l-2 2v12a2 2 0 002 2z" />
@@ -199,30 +205,36 @@ Prima di iniziare valutiamo insieme il tuo occhio, la tua ciglia naturale e lo s
       {
         id: "lamination",
         title: "Laminazione Ciglia e Sopracciglia✨",
-        subtitle: "Curvatura naturale + nutrimento",
-        img: "Screenshot 2026-01-20 alle 18.32.30.png,
-        short: "Se vuoi un look naturale, ciglia più “aperte” e ordinate. Sopracciglia naturali, come se non avessi fatto nulla.",
+        subtitle: "Curvatura, ordine e nutrimento",
+        img: "Screenshot 2026-01-20 alle 18.32.30.png",
+        short: "Per un effetto naturale ma curato: ciglia più aperte e sopracciglia pettinate, disciplinate e definite (senza effetto finto).",
         body:
-`La laminazione ciglia è il trattamento ideale se ami un risultato naturale ma visibile: le ciglia vengono sollevate, incurvate e nutrite, per uno sguardo più aperto e luminoso.
+`La laminazione è un trattamento super richiesto perché valorizza lo sguardo in modo naturale, lavorando sia su ciglia che su sopracciglia.
 
-✅ Cosa ottieni:
-• Curvatura naturale (effetto “lash lift”)
-• Ciglia più ordinate e più “lunghe” alla vista
-• Aspetto pulito anche senza mascara
+👁️ Laminazione ciglia:
+Le ciglia vengono sollevate e incurvate (effetto “lash lift”) e trattate con step nutrienti, per uno sguardo più aperto e luminoso.
+✅ Risultato:
+• Curvatura naturale e ordinata
+• Ciglia visivamente più lunghe
+• Look pulito anche senza mascara
 
-🧴 In più:
-Durante il trattamento si lavora anche sulla nutrizione: le ciglia risultano più morbide e curate.
+🪞 Laminazione sopracciglia (brow lamination):
+I peli vengono “pettinati” e disciplinati nella direzione giusta, per dare ordine e pienezza visiva, correggendo piccoli vuoti e asimmetrie.
+✅ Risultato:
+• Sopracciglia più piene e ordinate
+• Effetto lift e definizione soft
+• Ideale se i peli sono ribelli o crescono in direzioni diverse
 
 ⏱️ Durata:
-In media 6–8 settimane (varia in base al ciclo naturale delle ciglia).
+In media 6–8 settimane (può variare in base al ciclo naturale di ciglia e peli).
 
 👀 A chi lo consiglio:
-• A chi non vuole extension
-• A chi ha ciglia dritte o che “puntano in giù”
-• A chi vuole un effetto naturale ma evidente
+• A chi vuole un risultato naturale, ma evidente e curato
+• A chi non desidera extension o trucco quotidiano
+• A chi ha ciglia dritte / sopracciglia indisciplinate
 
 💡 Tip:
-Perfetta anche prima delle vacanze: zero sbatti, sguardo in ordine ogni giorno.`
+Perfetta prima di vacanze o eventi: zero sbatti, sguardo in ordine ogni giorno.`
       },
       {
         id: "powder",
@@ -294,7 +306,7 @@ Su pelli molto grasse o molto sensibili può essere più indicata la tecnica Pow
     function createCard(service) {
       const btn = document.createElement("button");
       btn.className =
-        "w-full text-left group rounded-3xl bg-white border border-rose-100 shadow hover:shadow-xl transition overflow-hidden";
+        "w-full text-left group rounded-3xl bg-white border border-rose-100 shadow hover:shadow-xl transition overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200";
       btn.setAttribute("data-id", service.id);
 
       btn.innerHTML = `
@@ -360,6 +372,11 @@ Su pelli molto grasse o molto sensibili può essere più indicata la tecnica Pow
 
     closeModal.addEventListener("click", closeModalFn);
     modal.addEventListener("click", (e) => { if (e.target === modal) closeModalFn(); });
+
+    // chiusura con ESC (miglioria, non cambia layout)
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("active")) closeModalFn();
+    });
 
     shareBtn.addEventListener("click", async () => {
       const text = `${modalTitle.textContent}\n${modalSubtitle.textContent}\n\n${modalBody.textContent}\n\nPrenota: ${SOCIAL.whatsapp}`;

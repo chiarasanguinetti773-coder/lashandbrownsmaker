@@ -4,190 +4,723 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lash&Browns by Martina</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; }
-    .modal { display:none; }
-    .modal.active { display:flex; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --noir: #1a1a1a;
+      --cream: #faf7f2;
+      --rose: #d4a5a5;
+      --rose-dark: #b88b8b;
+      --rose-light: #f5e8e8;
+      --gold: #c9a961;
+      --shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--noir);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Header */
+    header {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px var(--shadow);
+    }
+
+    .hero-image {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .hero-card:hover .hero-image img {
+      transform: scale(1.05);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .social-icon:hover {
+      background: white;
+      transform: translateY(-3px);
+    }
+
+    .social-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .social-icon:hover svg {
+      color: var(--rose-dark) !important;
+    }
+
+    .social-text {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-content {
+      padding: 3rem 2.5rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--noir);
+    }
+
+    .intro-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #4a4a4a;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .intro-text strong {
+      font-weight: 600;
+      color: var(--noir);
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 1.2rem;
+      background: var(--rose-dark);
+      color: white;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .cta-button:hover {
+      background: var(--noir);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Services Section */
+    .services-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .services-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .services-header {
+      background: white;
+      padding: 2.5rem;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .services-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .services-subtitle {
+      color: #666;
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .services-grid {
+      display: grid;
+      gap: 1.5rem;
+      padding: 2rem 0;
+    }
+
+    .service-card {
+      background: white;
+      border: 1px solid #e8e8e8;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--rose);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 20px 50px var(--shadow);
+      transform: translateY(-5px);
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-image {
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.08);
+    }
+
+    .service-content {
+      padding: 2rem;
+    }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--noir);
+    }
+
+    .service-subtitle {
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+
+    .service-description {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .warning-box {
+      background: #fff9f0;
+      border: 1px solid #f4e4c1;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      color: #8b6914;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .warning-box strong {
+      font-weight: 600;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      padding: 2rem;
+      overflow-y: auto;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 800px;
+      width: 100%;
+      margin: 2rem auto;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.3);
+    }
+
+    .modal-header {
+      padding: 2.5rem;
+      border-bottom: 1px solid #e8e8e8;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      flex: 1;
+    }
+
+    .modal-subtitle {
+      color: #999;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      font-weight: 300;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #999;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 2rem;
+    }
+
+    .modal-close:hover {
+      color: var(--noir);
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      padding: 2.5rem;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      margin-bottom: 2rem;
+    }
+
+    .modal-text {
+      color: #4a4a4a;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      white-space: pre-line;
+      font-weight: 300;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    /* Calendar Styles - Calendly Integration */
+    .booking-calendar {
+      margin: 2rem 0;
+      padding: 2rem;
+      background: var(--rose-light);
+      border-radius: 8px;
+    }
+
+    .calendar-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .calendar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--noir);
+      text-align: center;
+    }
+
+    .calendly-inline-widget {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .booking-note {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: white;
+      border-left: 3px solid var(--rose-dark);
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .modal-button {
+      padding: 1.1rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary {
+      background: var(--rose-dark);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--noir);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--rose-light);
+      color: var(--rose-dark);
+    }
+
+    .btn-secondary:hover {
+      background: var(--rose);
+      color: white;
+    }
+
+    .copy-hint {
+      text-align: center;
+      color: #999;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .copy-hint.visible {
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .service-image {
+        height: 200px;
+      }
+
+      .modal-content {
+        margin: 0;
+      }
+
+      .modal-header {
+        padding: 2rem 1.5rem;
+      }
+
+      .modal-body {
+        padding: 2rem 1.5rem;
+      }
+
+      .modal-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-close {
+        margin-left: 1rem;
+      }
+    }
   </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50 text-gray-800">
+<body>
+  <div class="grain-overlay"></div>
 
-  <!-- HEADER / HERO -->
-  <header class="max-w-3xl mx-auto px-4 pt-8 pb-6">
-    <div class="bg-white/80 backdrop-blur rounded-3xl shadow-xl overflow-hidden border border-rose-100">
-      <!-- Hero image -->
-      <div class="relative h-52 sm:h-64">
-        <img
-          src="WhatsApp Image 2026-01-20 at 19.16.06.jpeg"
-          alt="Lash & Brows"
-          class="w-full h-full object-cover"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
-
-        <div class="absolute bottom-0 left-0 right-0 p-5 sm:p-7 text-white">
-          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
-            Lash&amp;brows <span class="font-semibold opacity-95">by Martina</span>
-          </h1>
-          <p class="mt-1 text-sm sm:text-base opacity-90">
-            Sguardo curato, naturale o wow: scegli il tuo stile ✨
-          </p>
-
-          <!-- Social icons row -->
-          <div class="mt-4 flex items-center gap-3">
-            <!-- Cambia qui gli href quando mi dai i link -->
-            <a id="igLink" href="https://instagram.com/" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
-              <!-- Instagram icon -->
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/>
+  <!-- HEADER -->
+  <header>
+    <div class="hero-card">
+      <div class="hero-image">
+        <img src="WhatsApp Image 2026-01-20 at 19.16.06.jpeg" alt="Lash & Brows by Martina" />
+        <div class="hero-overlay">
+          <h1 class="hero-title">Lash&brows by Martina</h1>
+          <p class="hero-subtitle">Sguardo curato, naturale o wow: scegli il tuo stile ✨</p>
+          
+          <div class="social-links">
+            <a id="igLink" href="https://instagram.com/" target="_blank" class="social-icon">
+              <svg fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                <path d="M17.5 6.5h.01"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
               </svg>
             </a>
-
-            <a id="ttLink" href="https://tiktok.com/" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
-              <!-- TikTok-like icon -->
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gray-900" fill="currentColor">
+            
+            <a id="ttLink" href="https://tiktok.com/" target="_blank" class="social-icon">
+              <svg fill="#fff" viewBox="0 0 24 24">
                 <path d="M16.5 2c.3 2.1 1.6 3.9 3.5 4.8V10c-1.5 0-2.9-.5-4-1.3V16c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.3 0 .7 0 1 .1V13c-.3-.1-.6-.2-1-.2-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3V2h3.5z"/>
               </svg>
             </a>
-
-            <a id="waLink" href="https://wa.me/" target="_blank" rel="noopener"
-               class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 hover:bg-white transition shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80">
-              <!-- WhatsApp icon -->
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-green-600" fill="currentColor">
-                <path d="M20.52 3.48A11.94 11.94 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.97L0 24l6.34-1.68a11.9 11.9 0 0 0 5.72 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.4zM12.06 21.8h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.76 1 1-3.66-.24-.38a9.9 9.9 0 1 1 18.5-5.29c0 5.46-4.45 9.92-9.92 9.92zm5.76-7.42c-.31-.15-1.83-.9-2.11-1-.28-.1-.48-.15-.68.15-.2.31-.78 1-.95 1.2-.18.2-.36.23-.67.08-.31-.15-1.31-.48-2.49-1.54-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.13-.63.14-.14.31-.36.46-.54.15-.18.2-.31.31-.52.1-.2.05-.38-.03-.54-.08-.15-.68-1.64-.93-2.25-.24-.58-.48-.5-.68-.5h-.58c-.2 0-.54.08-.82.38-.28.31-1.08 1.06-1.08 2.58 0 1.52 1.1 2.99 1.25 3.2.15.2 2.17 3.31 5.26 4.64.74.32 1.32.51 1.77.65.75.24 1.44.2 1.98.12.6-.09 1.83-.75 2.09-1.48.26-.73.26-1.35.18-1.48-.08-.13-.28-.2-.6-.35z"/>
+            
+            <a id="waLink" href="https://wa.me/" target="_blank" class="social-icon">
+              <svg fill="#fff" viewBox="0 0 24 24">
+                <path d="M20.52 3.48A11.94 11.94 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.97L0 24l6.34-1.68a11.9 11.9 0 0 0 5.72 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.4z"/>
               </svg>
             </a>
-
-            <span class="text-xs sm:text-sm opacity-90 ml-1">Seguimi • Prenota • Scrivimi 💌</span>
+            
+            <span class="social-text">Seguimi • Prenota • Scrivimi</span>
           </div>
         </div>
       </div>
 
-      <!-- Intro copy + CTA -->
-      <div class="p-5 sm:p-8">
-        <h2 class="text-xl sm:text-2xl font-bold text-gray-900">
-          Benvenuta nel mio spazio 💗
-        </h2>
-
-        <p class="mt-3 text-gray-600 leading-relaxed">
-          Sono <span class="font-semibold text-gray-900">Martina</span>, Lash &amp; Brows Artist con esperienza nel valorizzare lo sguardo
-          rispettando la tua unicità. Qui non troverai “un trattamento uguale per tutte”:
+      <div class="hero-content">
+        <h2 class="section-title">Benvenuta nel mio spazio</h2>
+        
+        <p class="intro-text">
+          Sono <strong>Martina</strong>, Lash & Brows Artist con esperienza nel valorizzare lo sguardo
+          rispettando la tua unicità. Qui non troverai "un trattamento uguale per tutte":
           insieme scegliamo forma, intensità e finitura — dal super naturale al super definito —
-          per farti sentire <span class="font-semibold">ordinata, luminosa e sicura</span> anche senza trucco.
+          per farti sentire <strong>ordinata, luminosa e sicura</strong> anche senza trucco.
         </p>
 
-        <p class="mt-3 text-gray-600 leading-relaxed">
-          Vuoi capire qual è il servizio perfetto per te? 👇
-          Clicca e scopri tutti i trattamenti con foto e descrizioni dettagliate.
+        <p class="intro-text">
+          Vuoi capire qual è il servizio perfetto per te? 
+          Scopri tutti i trattamenti con foto e descrizioni dettagliate.
         </p>
 
-        <button id="discoverBtn"
-          class="mt-6 w-full rounded-2xl bg-gradient-to-r from-rose-500 to-fuchsia-600 hover:from-rose-600 hover:to-fuchsia-700 text-white font-semibold py-4 px-6 shadow-lg transition transform hover:scale-[1.01] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200">
-          Scopri di più ✨
+        <button id="discoverBtn" class="cta-button">
+          Scopri i Trattamenti
         </button>
       </div>
     </div>
   </header>
 
-  <!-- SERVICES (hidden until CTA) -->
-  <main id="servicesSection" class="max-w-3xl mx-auto px-4 pb-10 hidden">
-    <div class="bg-white/80 backdrop-blur rounded-3xl shadow-xl border border-rose-100 overflow-hidden">
-      <div class="p-5 sm:p-8 border-b border-rose-100">
-        <h3 class="text-xl sm:text-2xl font-bold">Trattamenti ✨</h3>
-        <p class="mt-2 text-gray-600">
-          Tocca un trattamento per leggere tutti i dettagli (durata, effetto, a chi è consigliato).
+  <!-- SERVICES -->
+  <section id="servicesSection" class="services-section">
+    <div style="background: white; box-shadow: 0 20px 60px rgba(0,0,0,0.08);">
+      <div class="services-header">
+        <h3 class="services-title">Trattamenti</h3>
+        <p class="services-subtitle">
+          Seleziona un trattamento per leggere tutti i dettagli: durata, effetto e a chi è consigliato.
         </p>
       </div>
 
-      <!-- Cards container -->
-      <div id="cards" class="p-5 sm:p-8 space-y-4"></div>
+      <div class="services-grid" id="servicesGrid"></div>
 
-      <!-- WARNING (richiesto) -->
-      <div class="px-5 sm:px-8 pb-6">
-        <div class="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-          <span class="font-semibold">⚠️ Nota importante:</span>
-          le informazioni qui sotto sono indicative. <span class="font-semibold">La scelta finale del trattamento verrà decisa in presenza, dopo una consulenza</span>,
+      <div style="padding: 2.5rem;">
+        <div class="warning-box">
+          <strong>⚠️ Nota importante:</strong> le informazioni sono indicative. 
+          <strong>La scelta finale del trattamento verrà decisa in presenza, dopo una consulenza</strong>,
           valutando occhio, ciglia, sopracciglia e risultato desiderato.
         </div>
       </div>
     </div>
-  </main>
+  </section>
 
   <!-- MODAL -->
-  <div id="modal" class="modal fixed inset-0 bg-black/60 items-start justify-center p-4 z-50 overflow-y-auto">
-    <div class="w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden mt-6">
-      <div class="p-4 sm:p-6 flex items-start justify-between border-b">
-        <div>
-          <h4 id="modalTitle" class="text-xl sm:text-2xl font-bold"></h4>
-          <p id="modalSubtitle" class="text-sm text-gray-500 mt-1"></p>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div style="flex: 1;">
+          <h4 id="modalTitle" class="modal-title"></h4>
+          <p id="modalSubtitle" class="modal-subtitle"></p>
         </div>
-        <button id="closeModal" class="p-2 rounded-xl hover:bg-gray-100 transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200" aria-label="Chiudi">
-          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <button id="closeModal" class="modal-close">×</button>
       </div>
 
-      <div class="p-4 sm:p-6">
-        <img id="modalImg" alt="" class="w-full h-48 sm:h-64 object-cover rounded-2xl" />
-        <div id="modalBody" class="mt-5 text-gray-700 leading-relaxed whitespace-pre-line"></div>
+      <div class="modal-body">
+        <img id="modalImg" class="modal-image" alt="" />
+        <div id="modalBody" class="modal-text"></div>
 
-        <div class="mt-6 flex flex-col sm:flex-row gap-3">
-          <a id="bookBtn" href="https://wa.me/" target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center gap-2 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-5 shadow transition active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-green-200">
+        <!-- Calendly Integration Section -->
+        <div id="calendlySection" class="booking-calendar" style="display: none;">
+          <div class="calendar-header">
+            <h4 class="calendar-title">📅 Prenota il tuo Appuntamento</h4>
+          </div>
+          
+          <!-- Calendly inline widget begin -->
+          <div class="calendly-inline-widget" 
+               data-url="https://calendly.com/TUONOMEUTENTE?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=b88b8b" 
+               style="min-width:320px;height:700px;"></div>
+          
+          <div class="booking-note">
+            <strong>📝 Nota:</strong> Dopo aver selezionato data e ora su Calendly, riceverai una conferma automatica via email. Per qualsiasi domanda, contattami su WhatsApp!
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button id="bookWhatsAppBtn" class="modal-button btn-primary" style="display: none;">
             Prenota su WhatsApp
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2H6m12 0h-2"/>
-            </svg>
-          </a>
-
-          <button id="shareBtn"
-            class="inline-flex items-center justify-center gap-2 rounded-2xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-semibold py-3 px-5 transition active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200">
+          </button>
+          <button id="shareBtn" class="modal-button btn-secondary">
             Copia testo da condividere
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16h8M8 12h8M8 8h8M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H8l-2 2v12a2 2 0 002 2z" />
-            </svg>
           </button>
         </div>
 
-        <p id="copyHint" class="text-xs text-gray-500 mt-3 hidden">Copiato! ✅</p>
+        <p id="copyHint" class="copy-hint">Copiato! ✅</p>
       </div>
     </div>
   </div>
 
   <script>
-    // 👉 CAMBIA QUI i link social quando me li dai
     const SOCIAL = {
       instagram: "https://instagram.com/",
       tiktok: "https://tiktok.com/",
-      whatsapp: "https://wa.me/" // esempio: "https://wa.me/393XXXXXXXXX"
+      whatsapp: "https://wa.me/393487647581"
     };
 
     document.getElementById("igLink").href = SOCIAL.instagram;
     document.getElementById("ttLink").href = SOCIAL.tiktok;
     document.getElementById("waLink").href = SOCIAL.whatsapp;
-    document.getElementById("bookBtn").href = SOCIAL.whatsapp;
 
     const SERVICES = [
       {
+        id: "extensions",
+        title: "Extension Ciglia dal 2D al 10D",
+        subtitle: "Volume personalizzato per ogni desiderio",
+        img: "WhatsApp Image 2026-01-20 at 19.18.17.jpeg",
+        short: "Dal look più naturale a quello più scenografico: scegli il volume perfetto per te.",
+        body:
+`Le extension ciglia sono applicazioni di ciglia sintetiche sulle tue ciglia naturali per aggiungere lunghezza, volume e curvatura personalizzata.
+
+✨ Cosa significano i volumi 2D-10D:
+Il numero indica quante extension sottilissime vengono applicate su ogni singola ciglia naturale:
+• 2D-3D: effetto naturale e leggero, ideale per chi inizia
+• 4D-6D: volume medio, sguardo definito ma equilibrato
+• 7D-10D: massimo volume, effetto scenografico e drammatico
+
+✅ Come funziona:
+Ogni ventaglio di ciglia viene creato al momento e applicato con precisione su ogni ciglia naturale idonea. Il risultato è personalizzato in base alla tua forma occhio e al volume desiderato.
+
+🎯 Risultato:
+• Lunghezza e volume su misura
+• Curvatura personalizzata
+• Sguardo più aperto e magnetico
+• Effetto naturale o wow a tua scelta
+
+⏱️ Durata e mantenimento:
+Le extension durano 3-4 settimane, ma per mantenerle sempre perfette consiglio un refill ogni 2-3 settimane (dipende dal ciclo di crescita delle tue ciglia).
+
+👁️ A chi lo consiglio:
+• A chi desidera svegliarsi già truccata
+• A chi vuole evitare mascara quotidiano
+• A chi cerca un look personalizzabile (dal naturale al super volume)
+• A chi ha eventi speciali o vuole sentirsi sempre al top
+
+💡 Tip:
+Durante la consulenza valutiamo insieme il volume ideale per te: la scelta dipende dalle tue ciglia naturali, dalla forma dell'occhio e dal risultato che desideri ottenere.
+
+📌 Nota importante:
+Più alto è il numero D, più voluminoso sarà l'effetto. Consiglio sempre di iniziare con volumi medi (3D-5D) per poi eventualmente aumentare se desideri più intensità.`
+      },
+      {
         id: "russian",
-        title: "Effetto Russo Ciglia 💥",
+        title: "Effetto Russo Ciglia",
         subtitle: "Volume intenso e sguardo super definito",
         img: "WhatsApp Image 2026-01-20 at 19.18.17.jpeg",
         short: "Perfetto se vuoi un effetto pieno, scenografico e ordinato ogni giorno.",
         body:
-`L’“Effetto Russo” è un trattamento di extension ciglia pensato per chi desidera uno sguardo più intenso e definito, con un risultato visibilmente pieno ma sempre armonioso.
+`L'"Effetto Russo" è un trattamento di extension ciglia pensato per chi desidera uno sguardo più intenso e definito, con un risultato visibilmente pieno ma sempre armonioso.
 
 ✅ Come funziona:
 Creo dei piccoli ventagli (fan) di più ciglia sottilissime e li applico su ogni ciglia naturale idonea. Questo permette di ottenere volume e profondità senza appesantire.
 
 ✨ Risultato:
-• Effetto wow, pieno e “fluffy”
+• Effetto wow, pieno e "fluffy"
 • Sguardo più aperto e magnetico
 • Ideale anche se hai ciglia naturali poco folte
 
@@ -195,31 +728,31 @@ Creo dei piccoli ventagli (fan) di più ciglia sottilissime e li applico su ogni
 Il trattamento dura in media 3–4 settimane, ma per averle sempre perfette consiglio un refill ogni 2–3 settimane (dipende dal tuo ciclo di crescita e dalle abitudini).
 
 👀 A chi lo consiglio:
-• A chi ama un make-up look “pronto” anche senza trucco
+• A chi ama un make-up look "pronto" anche senza trucco
 • A chi vuole definizione e volume
 • A chi desidera correggere visivamente forma/occhio (si sceglie mappatura personalizzata)
 
 📌 Nota importante:
-Prima di iniziare valutiamo insieme il tuo occhio, la tua ciglia naturale e lo stile che preferisci: l’obiettivo è un effetto bello, proporzionato e confortevole.`
+Prima di iniziare valutiamo insieme il tuo occhio, la tua ciglia naturale e lo stile che preferisci: l'obiettivo è un effetto bello, proporzionato e confortevole.`
       },
       {
         id: "lamination",
-        title: "Laminazione Ciglia e Sopracciglia✨",
+        title: "Laminazione Ciglia e Sopracciglia",
         subtitle: "Curvatura, ordine e nutrimento",
         img: "Screenshot 2026-01-20 alle 18.32.56.png",
-        short: "Per un effetto naturale ma curato: ciglia più aperte e sopracciglia pettinate, disciplinate e definite (senza effetto finto).",
+        short: "Per un effetto naturale ma curato: ciglia più aperte e sopracciglia pettinate, disciplinate e definite.",
         body:
 `La laminazione è un trattamento super richiesto perché valorizza lo sguardo in modo naturale, lavorando sia su ciglia che su sopracciglia.
 
 👁️ Laminazione ciglia:
-Le ciglia vengono sollevate e incurvate (effetto “lash lift”) e trattate con step nutrienti, per uno sguardo più aperto e luminoso.
+Le ciglia vengono sollevate e incurvate (effetto "lash lift") e trattate con step nutrienti, per uno sguardo più aperto e luminoso.
 ✅ Risultato:
 • Curvatura naturale e ordinata
 • Ciglia visivamente più lunghe
 • Look pulito anche senza mascara
 
 🪞 Laminazione sopracciglia (brow lamination):
-I peli vengono “pettinati” e disciplinati nella direzione giusta, per dare ordine e pienezza visiva, correggendo piccoli vuoti e asimmetrie.
+I peli vengono "pettinati" e disciplinati nella direzione giusta, per dare ordine e pienezza visiva, correggendo piccoli vuoti e asimmetrie.
 ✅ Risultato:
 • Sopracciglia più piene e ordinate
 • Effetto lift e definizione soft
@@ -238,7 +771,7 @@ Perfetta prima di vacanze o eventi: zero sbatti, sguardo in ordine ogni giorno.`
       },
       {
         id: "powder",
-        title: "Powder Brows ☁️",
+        title: "Powder Brows",
         subtitle: "Sopracciglia sfumate e definite",
         img: "Screenshot 2026-01-20 alle 18.32.36.png",
         short: "Effetto trucco soft: sopracciglia piene, ordinate e super eleganti.",
@@ -247,11 +780,11 @@ Perfetta prima di vacanze o eventi: zero sbatti, sguardo in ordine ogni giorno.`
 
 ✨ Risultato:
 • Sopracciglia più piene e ordinate
-• Effetto “ombrettato” (non a pelo)
+• Effetto "ombrettato" (non a pelo)
 • Definizione elegante e modulabile (soft o più intensa)
 
 ✅ Perché piace:
-Perché “sistema” la forma senza sembrare eccessiva: si lavora sulla struttura e sulla sfumatura per valorizzare il tuo viso.
+Perché "sistema" la forma senza sembrare eccessiva: si lavora sulla struttura e sulla sfumatura per valorizzare il tuo viso.
 
 ⏱️ Durata:
 Mediamente 12–24 mesi (dipende dalla pelle, stile di vita e cura). Sono consigliati ritocchi nel tempo.
@@ -266,12 +799,12 @@ Prima di procedere si fa sempre una consulenza (forma + colore) per un risultato
       },
       {
         id: "microblading",
-        title: "Microblading 🪶",
+        title: "Microblading",
         subtitle: "Effetto pelo realistico",
         img: "Screenshot 2026-01-20 alle 18.32.43.png",
         short: "Per chi vuole riempire vuoti con un effetto pelo super naturale.",
         body:
-`Il microblading è una tecnica manuale che ricrea l’effetto pelo, disegnando tratti sottili e realistici dove mancano.
+`Il microblading è una tecnica manuale che ricrea l'effetto pelo, disegnando tratti sottili e realistici dove mancano.
 
 ✨ Risultato:
 • Effetto pelo naturale
@@ -286,106 +819,206 @@ In media 9–18 mesi (varia per tipo di pelle e cura). Nel tempo si può fare un
 
 👀 A chi lo consiglio:
 • A chi ha sopracciglia rade o con buchi
-• A chi vuole un effetto naturale “pelo su pelo”
+• A chi vuole un effetto naturale "pelo su pelo"
 • A chi desidera una forma più armonica senza look truccato
 
 📌 Nota:
 Su pelli molto grasse o molto sensibili può essere più indicata la tecnica Powder: te lo dico sempre con sincerità in consulenza.`
+      },
+      {
+        id: "lips",
+        title: "Trucco Permanente Labbra",
+        subtitle: "Colore naturale e definizione perfetta",
+        img: "Screenshot 2026-01-20 alle 18.32.43.png",
+        short: "Labbra sempre colorate, definite e idratate con un effetto naturale e duraturo.",
+        body:
+`Il trucco permanente labbra è un trattamento che dona colore, definizione e pienezza alle labbra in modo naturale e armonioso.
+
+✨ Risultato:
+• Labbra più definite e simmetriche
+• Colore uniforme e naturale
+• Effetto idratato e sano
+• Correzione di asimmetrie o contorni sfumati
+
+✅ Come funziona:
+Si studia insieme la forma e il colore ideale per il tuo viso e il tuo incarnato. Il pigmento viene depositato delicatamente per creare un effetto che può essere:
+• Nude look (effetto labbra al naturale ma migliorate)
+• Contorno definito con sfumatura interna
+• Full color (labbra completamente colorate)
+
+⏱️ Durata:
+In media 12–24 mesi, a seconda del tipo di pelle, stile di vita e cura. È consigliato un ritocco di mantenimento per mantenere il risultato ottimale.
+
+👄 A chi lo consiglio:
+• A chi desidera labbra sempre ordinate senza rossetto
+• A chi ha labbra pallide o poco definite
+• A chi vuole correggere piccole asimmetrie
+• A chi ama un look curato e naturale h24
+
+💡 Tip:
+Perfetto per chi vuole svegliarsi già "truccata" o per chi pratica sport e non ama riapplicare continuamente il rossetto.
+
+📌 Nota importante:
+Prima del trattamento facciamo sempre una consulenza approfondita per scegliere insieme forma, intensità e colore. Il risultato finale sarà personalizzato al 100% su di te.
+
+🌸 Post-trattamento:
+Nei primi giorni le labbra appariranno più intense, poi il colore si stabilizza raggiungendo la tonalità definitiva entro 4 settimane. Ti darò tutte le indicazioni per la cura corretta.`
+      },
+      {
+        id: "videocorso",
+        title: "Videocorso Laminazione",
+        subtitle: "Impara la tecnica professionale",
+        img: "Screenshot 2026-01-20 alle 18.32.56.png",
+        short: "Pacchetto di videolezioni per imparare a fare correttamente la laminazione ciglia e sopracciglia.",
+        body:
+`Il videocorso di laminazione è un percorso formativo completo per imparare la tecnica professionale della laminazione ciglia e sopracciglia direttamente da casa tua.
+
+📚 Cosa include il corso:
+• Videolezioni dettagliate step by step
+• Teoria completa sulla laminazione
+• Dimostrazioni pratiche su modella
+• Spiegazione prodotti e strumenti necessari
+• Tecniche di mappatura e personalizzazione
+• Gestione di problemi comuni e soluzioni
+• Consigli per lavorare in sicurezza
+
+✨ Cosa imparerai:
+• Come eseguire una laminazione ciglia perfetta
+• Come eseguire una laminazione sopracciglia professionale
+• Tempi di posa corretti per ogni tipo di pelo
+• Come scegliere le curvature e forme giuste
+• Protocolli di sicurezza e igiene
+• Trucchi e segreti per risultati impeccabili
+
+🎯 A chi è rivolto:
+• Estetiste che vogliono ampliare i servizi
+• Professioniste del beauty che vogliono specializzarsi
+• Chi vuole imparare una nuova tecnica
+• Chi desidera formarsi con flessibilità di orario
+
+⏱️ Formato:
+Videolezioni registrate che puoi seguire quando e dove vuoi, al tuo ritmo. Accesso illimitato al materiale didattico.
+
+💼 Perché scegliere questo corso:
+• Formazione professionale da lash artist esperta
+• Contenuti pratici e applicabili subito
+• Supporto via messaggio per domande
+• Investi nella tua formazione e crescita professionale
+
+📱 Come accedere:
+Contattami su WhatsApp per ricevere tutte le informazioni sul pacchetto videocorso, i dettagli sui contenuti e come iniziare il tuo percorso formativo.
+
+✨ Bonus:
+Dopo aver completato il corso, avrai la possibilità di contattarmi per consulenze personalizzate sui tuoi primi lavori.`
       }
     ];
 
+    // Discover button
     const discoverBtn = document.getElementById("discoverBtn");
     const servicesSection = document.getElementById("servicesSection");
-    const cardsWrap = document.getElementById("cards");
 
     discoverBtn.addEventListener("click", () => {
-      servicesSection.classList.remove("hidden");
-      servicesSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      servicesSection.classList.add("visible");
+      setTimeout(() => {
+        servicesSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
     });
 
-    function createCard(service) {
-      const btn = document.createElement("button");
-      btn.className =
-        "w-full text-left group rounded-3xl bg-white border border-rose-100 shadow hover:shadow-xl transition overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-200";
-      btn.setAttribute("data-id", service.id);
-
-      btn.innerHTML = `
-        <div class="flex flex-col sm:flex-row">
-          <div class="sm:w-44 w-full h-40 sm:h-auto">
-            <img src="${service.img}" alt="${service.title}"
-                 class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-300" />
-          </div>
-          <div class="p-4 sm:p-5 flex-1">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <h4 class="text-lg sm:text-xl font-extrabold text-gray-900">${service.title}</h4>
-                <p class="text-sm text-gray-500 mt-1">${service.subtitle}</p>
-              </div>
-              <span class="mt-1 inline-flex items-center gap-1 text-rose-600 font-semibold text-sm">
-                Apri
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
-            </div>
-            <p class="mt-3 text-gray-700 leading-relaxed">${service.short}</p>
-          </div>
+    // Render services
+    const servicesGrid = document.getElementById("servicesGrid");
+    
+    SERVICES.forEach(service => {
+      const card = document.createElement("div");
+      card.className = "service-card";
+      card.innerHTML = `
+        <div class="service-image">
+          <img src="${service.img}" alt="${service.title}" />
+        </div>
+        <div class="service-content">
+          <h4 class="service-title">${service.title}</h4>
+          <p class="service-subtitle">${service.subtitle}</p>
+          <p class="service-description">${service.short}</p>
         </div>
       `;
+      card.addEventListener("click", () => openModal(service.id));
+      servicesGrid.appendChild(card);
+    });
 
-      btn.addEventListener("click", () => openModal(service.id));
-      return btn;
-    }
-
-    // render cards
-    SERVICES.forEach(s => cardsWrap.appendChild(createCard(s)));
-
-    // modal logic
+    // Modal
     const modal = document.getElementById("modal");
-    const closeModal = document.getElementById("closeModal");
+    const closeModalBtn = document.getElementById("closeModal");
     const modalTitle = document.getElementById("modalTitle");
     const modalSubtitle = document.getElementById("modalSubtitle");
     const modalImg = document.getElementById("modalImg");
     const modalBody = document.getElementById("modalBody");
     const shareBtn = document.getElementById("shareBtn");
     const copyHint = document.getElementById("copyHint");
+    const calendlySection = document.getElementById("calendlySection");
+    const bookWhatsAppBtn = document.getElementById("bookWhatsAppBtn");
 
     function openModal(id) {
-      const s = SERVICES.find(x => x.id === id);
-      if (!s) return;
+      const service = SERVICES.find(s => s.id === id);
+      if (!service) return;
 
-      modalTitle.textContent = s.title;
-      modalSubtitle.textContent = s.subtitle;
-      modalImg.src = s.img;
-      modalImg.alt = s.title;
-      modalBody.textContent = s.body;
+      modalTitle.textContent = service.title;
+      modalSubtitle.textContent = service.subtitle;
+      modalImg.src = service.img;
+      modalImg.alt = service.title;
+      modalBody.textContent = service.body;
 
-      copyHint.classList.add("hidden");
+      // Show/hide booking elements based on service type
+      if (id === "videocorso") {
+        // Video course: show WhatsApp button only
+        bookWhatsAppBtn.style.display = "block";
+        bookWhatsAppBtn.textContent = "Richiedi Info su WhatsApp";
+        bookWhatsAppBtn.onclick = () => {
+          const message = `Ciao! 👋\n\nVorrei ricevere informazioni sul Videocorso Laminazione.\n\nGrazie! 💗`;
+          window.open(`${SOCIAL.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
+        };
+        calendlySection.style.display = "none";
+      } else {
+        // Regular services: show Calendly widget
+        bookWhatsAppBtn.style.display = "none";
+        calendlySection.style.display = "block";
+        
+        // Load Calendly script if not already loaded
+        if (!document.querySelector('script[src*="calendly"]')) {
+          const script = document.createElement('script');
+          script.src = 'https://assets.calendly.com/assets/external/widget.js';
+          script.async = true;
+          document.head.appendChild(script);
+        }
+      }
+
+      copyHint.classList.remove("visible");
       modal.classList.add("active");
       document.body.style.overflow = "hidden";
     }
 
-    function closeModalFn() {
+    function closeModal() {
       modal.classList.remove("active");
       document.body.style.overflow = "";
     }
 
-    closeModal.addEventListener("click", closeModalFn);
-    modal.addEventListener("click", (e) => { if (e.target === modal) closeModalFn(); });
+    closeModalBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
 
-    // chiusura con ESC (miglioria, non cambia layout)
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("active")) closeModalFn();
+      if (e.key === "Escape" && modal.classList.contains("active")) {
+        closeModal();
+      }
     });
 
     shareBtn.addEventListener("click", async () => {
       const text = `${modalTitle.textContent}\n${modalSubtitle.textContent}\n\n${modalBody.textContent}\n\nPrenota: ${SOCIAL.whatsapp}`;
       try {
         await navigator.clipboard.writeText(text);
-        copyHint.classList.remove("hidden");
-        setTimeout(() => copyHint.classList.add("hidden"), 1500);
+        copyHint.classList.add("visible");
+        setTimeout(() => copyHint.classList.remove("visible"), 2000);
       } catch (err) {
-        alert("Non riesco a copiare automaticamente. Se vuoi, seleziona il testo e copialo manualmente.");
+        alert("Non riesco a copiare automaticamente.");
       }
     });
   </script>
